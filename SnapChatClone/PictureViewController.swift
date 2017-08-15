@@ -53,7 +53,6 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
                 if error != nil{
                     print("Error:")
                 }else{
-                    print(metadata?.downloadURL())
                     self.uploadSpinner.stopAnimating()
                     self.performSegue(withIdentifier: "selectUserSegue", sender: nil)
                 }
