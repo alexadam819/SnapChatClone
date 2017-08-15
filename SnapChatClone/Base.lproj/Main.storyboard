@@ -158,7 +158,6 @@
                                                         <state key="normal" title="Send"/>
                                                         <connections>
                                                             <action selector="nextButton:" destination="AWK-2S-Stj" eventType="touchUpInside" id="lEO-CX-mfL"/>
-                                                            <action selector="sendSnap:" destination="AWK-2S-Stj" eventType="touchUpInside" id="ryG-uP-TBc"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -174,8 +173,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="yes" enablesReturnKeyAutomatically="YES"/>
                             </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tta-1A-3Xt">
+                                <rect key="frame" x="162.5" y="308.5" width="50" height="50"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xuG-0d-JhX">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="OPu-gt-f1z"/>
+                                    <constraint firstAttribute="height" constant="50" id="brc-je-maU"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tta-1A-3Xt" firstAttribute="centerX" secondItem="La6-H3-4s5" secondAttribute="centerX" id="s4b-ry-t2j"/>
+                            <constraint firstItem="tta-1A-3Xt" firstAttribute="centerY" secondItem="La6-H3-4s5" secondAttribute="centerY" id="swo-xC-Woi"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WQE-vQ-FEC">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="jMO-aw-ade">
@@ -188,6 +203,7 @@
                         <outlet property="nextButton" destination="G7x-r8-cST" id="5tZ-ot-TSF"/>
                         <outlet property="snapDescription" destination="hhq-mT-332" id="8pY-IB-Oa9"/>
                         <outlet property="snapImage" destination="IvT-Et-1yK" id="rnR-hT-Wes"/>
+                        <outlet property="uploadSpinner" destination="xuG-0d-JhX" id="dhN-wb-G0O"/>
                         <segue destination="FKk-dP-dMZ" kind="show" identifier="selectUserSegue" id="giA-dO-jRe"/>
                     </connections>
                 </viewController>
@@ -195,10 +211,10 @@
             </objects>
             <point key="canvasLocation" x="2444" y="136.28185907046478"/>
         </scene>
-        <!--View Controller-->
+        <!--Select User View Controller-->
         <scene sceneID="8Ra-2g-SKa">
             <objects>
-                <viewController id="FKk-dP-dMZ" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="FKk-dP-dMZ" customClass="SelectUserViewController" customModule="SnapChatClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yvO-j4-ljg"/>
                         <viewControllerLayoutGuide type="bottom" id="ZWN-hC-HEO"/>
@@ -206,8 +222,23 @@
                     <view key="view" contentMode="scaleToFill" id="KNb-bf-Qj5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C3F-Zs-h9X">
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C3F-Zs-h9X" firstAttribute="top" secondItem="yvO-j4-ljg" secondAttribute="bottom" id="NHt-Bq-1DL"/>
+                            <constraint firstItem="C3F-Zs-h9X" firstAttribute="leading" secondItem="KNb-bf-Qj5" secondAttribute="leadingMargin" id="YiK-9z-kVD"/>
+                            <constraint firstItem="ZWN-hC-HEO" firstAttribute="top" secondItem="C3F-Zs-h9X" secondAttribute="bottom" id="kRe-pb-hTH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C3F-Zs-h9X" secondAttribute="trailing" id="qcx-qX-LWT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="C3F-Zs-h9X" id="qQZ-Cz-Y4W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z5f-q1-rGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

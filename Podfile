@@ -6,7 +6,7 @@ target 'SnapChatClone' do
   use_frameworks!
 
   # Pods for SnapChatClone
-pod 'Firebase'
+pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
