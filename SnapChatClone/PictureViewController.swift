@@ -54,13 +54,15 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
                     print("Error:")
                 }else{
                     self.uploadSpinner.stopAnimating()
-                    self.performSegue(withIdentifier: "selectUserSegue", sender: nil)
+                    self.performSegue(withIdentifier: "selectUserSegue", sender: metadata?.downloadURL()?.absoluteString)
                 }
             }
         )
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         
+         let nextVS = segue.destination as! SelectUserViewController
+        nextVS.imageURL = sender as! String
+        nextVS.snapDesc = snapDescription.text!
     }
 }

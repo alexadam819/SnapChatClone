@@ -91,7 +91,7 @@
         <!--Snaps View Controller-->
         <scene sceneID="G8g-jM-2nC">
             <objects>
-                <viewController id="Bct-yl-g56" customClass="SnapsViewController" customModule="SnapChatClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Bct-yl-g56" customClass="SnapsViewController" customModule="SnapChatClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ODm-Mn-qtG"/>
                         <viewControllerLayoutGuide type="bottom" id="0Fl-FW-5gn"/>
@@ -99,7 +99,19 @@
                     <view key="view" contentMode="scaleToFill" id="Epu-JX-LeC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GOo-z8-bbi">
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0Fl-FW-5gn" firstAttribute="top" secondItem="GOo-z8-bbi" secondAttribute="bottom" id="D2p-kL-uQh"/>
+                            <constraint firstItem="GOo-z8-bbi" firstAttribute="top" secondItem="ODm-Mn-qtG" secondAttribute="bottom" id="XFT-no-PDh"/>
+                            <constraint firstItem="GOo-z8-bbi" firstAttribute="leading" secondItem="Epu-JX-LeC" secondAttribute="leadingMargin" id="gDD-c8-xeC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GOo-z8-bbi" secondAttribute="trailing" id="qdh-ob-9Bu"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vcy-cW-Qoo">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="ty2-j4-S25">
@@ -113,6 +125,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="snapTable" destination="GOo-z8-bbi" id="8cw-os-h23"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGZ-nh-hpd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

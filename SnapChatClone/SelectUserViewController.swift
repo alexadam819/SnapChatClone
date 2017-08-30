@@ -13,6 +13,9 @@ class SelectUserViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     var users : [User] = []
     
+    var imageURL = ""
+    var snapDesc = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -36,10 +39,15 @@ class SelectUserViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let user = users[indexPath.row]
-        
         cell.textLabel?.text = user.email
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let user = users[indexPath.row]
+        let snap = ["from": user.email, "description": snapDesc, "imageURL": imageURL  ]
+        Database.database().reference().child("user").child(user.uid).child("snaps").childByAutoId().setValue(snap)
     }
      
 }

@@ -7,13 +7,40 @@
 //
 
 import UIKit
+import Firebase
 
-class SnapsViewController: UIViewController, UITextFieldDelegate {
+class SnapsViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var snapTable: UITableView!
     @IBOutlet weak var demoTextField: UITextField!
+    var snaps : [Snap] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        snapTable.dataSource = self
+        snapTable.delegate = self
+        Database.database().reference().child("user").child((Auth.auth().currentUser?.uid)!).child("snaps").observe(DataEventType.childAdded, with: {(snapshot) in
+            let snap  = Snap()
+            snap.imageURL = (snapshot.value as! NSDictionary)["imageURL"] as! String
+            snap.from = (snapshot.value as! NSDictionary)["from"] as! String
+            snap.snapDesc = (snapshot.value as! NSDictionary)["description"] as! String
+            
+            self.snaps.append(snap)
+            self.snapTable.reloadData()
+        })
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return snaps.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let snap = snaps[indexPath.row]
+        cell.textLabel?.text = snap.from
+        return cell
     }
 
     @IBAction func logOut(_ sender: Any) {
